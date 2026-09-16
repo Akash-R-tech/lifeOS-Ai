@@ -1,0 +1,6 @@
+{
+  "name": "LifeOS AI",
+  "description": "Autonomous Voice-First Personal Super Assistant with continuous event intelligence, proactive reasoning, and controlled automation.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

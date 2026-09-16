@@ -1,0 +1,47 @@
+from pydantic import BaseModel
+from typing import Optional, Dict, Any, List
+from enum import Enum
+from datetime import datetime
+
+class ActionType(str, Enum):
+    OPEN_FILE = "OPEN_FILE"
+    CREATE_FILE = "CREATE_FILE"
+    MODIFY_FILE = "MODIFY_FILE"
+    CREATE_FOLDER = "CREATE_FOLDER"
+    OPEN_APPLICATION = "OPEN_APPLICATION"
+    PREPARE_WORKSPACE = "PREPARE_WORKSPACE"
+    CREATE_TASK = "CREATE_TASK"
+    MODIFY_TASK = "MODIFY_TASK"
+    UPDATE_SCHEDULE = "UPDATE_SCHEDULE"
+    DRAFT_ROUTINE_EMAIL = "DRAFT_ROUTINE_EMAIL"
+    VOICE_NOTIFY = "VOICE_NOTIFY"
+    CONFIRM_IRREVERSIBLE = "CONFIRM_IRREVERSIBLE"
+
+class Capability(str, Enum):
+    READ_EMAIL = "READ_EMAIL"
+    READ_EMAIL_ATTACHMENTS = "READ_EMAIL_ATTACHMENTS"
+    SEND_EMAIL = "SEND_EMAIL"
+    READ_CALENDAR = "READ_CALENDAR"
+    CREATE_CALENDAR_EVENT = "CREATE_CALENDAR_EVENT"
+    READ_FILES = "READ_FILES"
+    CREATE_FILES = "CREATE_FILES"
+    MODIFY_FILES = "MODIFY_FILES"
+    OPEN_APPLICATIONS = "OPEN_APPLICATIONS"
+    BROWSER_AUTOMATION = "BROWSER_AUTOMATION"
+    VOICE_CONTROL = "VOICE_CONTROL"
+    READ_CLASSROOM = "READ_CLASSROOM"
+    CREATE_TASKS = "CREATE_TASKS"
+    MODIFY_TASKS = "MODIFY_TASKS"
+    AUTOMATIC_REMINDERS = "AUTOMATIC_REMINDERS"
+    AI_ASSIGNMENT_ASSISTANCE = "AI_ASSIGNMENT_ASSISTANCE"
+
+class ActionLog(BaseModel):
+    id: str
+    timestamp: datetime = datetime.utcnow()
+    trigger: str
+    action: ActionType
+    target: str
+    permission: Capability
+    result: str  # "SUCCESS" | "FAILED" | "REQUIRES_CONFIRMATION"
+    verified: bool = False
+    details: Optional[Dict[str, Any]] = None
